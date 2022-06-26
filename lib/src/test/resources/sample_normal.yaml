@@ -1,0 +1,10 @@
+customer:
+  name:
+    first.name: "Luthfi"
+  address:
+    street: "Kenanga St."
+    block: "F"
+    number: 2
+    province:
+      name: "Jakarta"
+      order: 1
