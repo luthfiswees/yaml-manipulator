@@ -6,7 +6,7 @@ package id.luthfiswees.yaml.manipulator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LibraryTest {
+class YamlManipulatorTest {
     // @Test void someLibraryMethodReturnsTrue() {
     //     Library classUnderTest = new Library();
     //     assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");

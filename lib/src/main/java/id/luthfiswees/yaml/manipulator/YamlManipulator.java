@@ -8,7 +8,7 @@ import java.util.Map;
  * Yaml Manipulator is a library where you can add, update, or delete key in Yaml files
  *  @author Luthfi Kurnia Putra
  */
-public class Library {
+public class YamlManipulator {
 
     /**
      * Add value to provided yaml according to it's keyset
