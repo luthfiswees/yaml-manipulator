@@ -9,10 +9,14 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+
+    // for publishing to artifactory
+    id 'maven-publish'
+    id 'signing'
 }
 
 // Metadata
-group 'id.luthfiswees.yaml.manipulator'
+group 'id.luthfiswees'
 archivesBaseName = "yaml-manipulator"
 version '0.0.1'
 
@@ -38,4 +42,87 @@ dependencies {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+// Publishing Needs
+// #######################################################################################################################
+
+javadoc {
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task javadocJarHelper(type: Javadoc) {
+
+    source = sourceSets.main.java.srcDirs
+    failOnError = false
+}
+
+task javadocJar(type: Jar, dependsOn: javadocJarHelper) {
+    archiveClassifier.set('javadoc')
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+// for publishing, reference here https://central.sonatype.org/publish/publish-gradle/#metadata-definition-and-upload
+publishing {
+	repositories {
+		maven {
+			name = "ossrh"
+            // Reference https://stackoverflow.com/questions/66812495/gradle-error-when-using-maven-publishing-task
+			def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = project.version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			credentials {
+				username = findProperty('ossrhUsername')
+				password = findProperty('ossrhPassword')
+			}
+            
+		}
+	}
+
+	publications {
+    	mavenJava(MavenPublication) {
+
+            artifactId = 'yaml-manipulator'
+            from components.java
+      		artifact sourcesJar
+            artifact javadocJar
+      		
+			pom {
+		    	name = 'YamlManipulator'
+		    	packaging = 'jar'
+		    	description = 'Yaml Manipulator built on top of snakeyaml. Makes manipulating yaml easier'
+		    	url = 'https://github.com/luthfiswees/yaml-manipulator'
+			
+				scm {
+                    url = 'https://github.com/luthfiswees/yaml-manipulator.git'
+                    connection = 'scm:git@github.com:luthfiswees/yaml-manipulator.git'
+                    developerConnection = 'scm:git@github.com:luthfiswees/yaml-manipulator.git'
+                }
+		
+		    	licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+		
+		    	developers {
+		      		developer {
+		        		id = 'luthfiswees'
+		        		name = 'Luthfi Kurnia Putra'
+		        		email = 'luthfiswees@gmail.com'
+		      		}
+		    	}
+		    }
+    	}
+	}
+}
+
+signing {
+    sign publishing.publications.mavenJava
 }
