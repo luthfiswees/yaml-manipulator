@@ -16,7 +16,7 @@ class ImplementationTest {
     // Test if add normal key is successful
     @Test void addKey_addNormalKey() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.addKey(yaml, "customer:::name:::last.name", "Putra");
+        yaml = Implementation.addKey(yaml, "customer:::name:::last.name", "Putra", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -30,7 +30,7 @@ class ImplementationTest {
     // Test add key with entirely new branch of values
     @Test void addKey_addWithMultipleNestedKey() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.addKey(yaml, "item:::detail:::name", "Fried Chicken");
+        yaml = Implementation.addKey(yaml, "item:::detail:::name", "Fried Chicken", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("item");
         assertNotNull(temp);
@@ -44,7 +44,7 @@ class ImplementationTest {
     // Test if the key already exist, it will not override the existing value
     @Test void addKey_testIfNotOverwriteValue() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.addKey(yaml, "customer:::name:::first.name", "Fried Chicken");
+        yaml = Implementation.addKey(yaml, "customer:::name:::first.name", "Fried Chicken", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -58,7 +58,7 @@ class ImplementationTest {
     // Test if value datatype is preserved if added to the yaml (int)
     @Test void addKey_testIfDatatypePreserved_Int() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.addKey(yaml, "customer:::name:::age", 15);
+        yaml = Implementation.addKey(yaml, "customer:::name:::age", 15, Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -73,7 +73,7 @@ class ImplementationTest {
     // Test if value datatype is preserved if added to the yaml (boolean)
     @Test void addKey_testIfDatatypePreserved_Boolean() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.addKey(yaml, "customer:::name:::dead", false);
+        yaml = Implementation.addKey(yaml, "customer:::name:::dead", false, Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -88,7 +88,7 @@ class ImplementationTest {
     // Test if value datatype is preserved if added to the yaml (String)
     @Test void addKey_testIfDatatypePreserved_String() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.addKey(yaml, "customer:::name:::dead", "no");
+        yaml = Implementation.addKey(yaml, "customer:::name:::dead", "no", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -103,7 +103,7 @@ class ImplementationTest {
     // Test if delete normal key is successful
     @Test void deleteKey_deleteNormalKey() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.deleteKey(yaml, "customer:::address:::province:::name");
+        yaml = Implementation.deleteKey(yaml, "customer:::address:::province:::name", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -120,7 +120,7 @@ class ImplementationTest {
     // Test if able to delete parent without deleting the same level node
     @Test void deleteKey_deleteKeyAsParentWithoutDeletingSameLevelNode() {
         Map<String, Object> yaml = loadTestYamlResource("sample_normal.yaml");
-        yaml = Implementation.deleteKey(yaml, "customer:::address:::province");
+        yaml = Implementation.deleteKey(yaml, "customer:::address:::province", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("customer");
         assertNotNull(temp);
@@ -138,7 +138,7 @@ class ImplementationTest {
     // Test if deleteKey will not delete anything when the key is not right
     @Test void deleteKey_notDeleteAnythingIfKeyIsNotValid() {
         Map<String, Object> yaml = loadTestYamlResource("sample_delete.yaml");
-        yaml = Implementation.deleteKey(yaml, "customer:::address:::province");
+        yaml = Implementation.deleteKey(yaml, "customer:::address:::province", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("consumer");
         assertNotNull(temp);
@@ -150,7 +150,7 @@ class ImplementationTest {
     // Test if deleteKey will not delete anything when the key is not right (using the same tree)
     @Test void deleteKey_notDeleteAnythingIfKeyIsNotValidWithinSameTree() {
         Map<String, Object> yaml = loadTestYamlResource("sample_delete.yaml");
-        yaml = Implementation.deleteKey(yaml, "consumer:::address");
+        yaml = Implementation.deleteKey(yaml, "consumer:::address", Constant.DEFAULT_KEYSET_SEPARATOR);
 
         Map<String, Object> temp = (Map) yaml.get("consumer");
         assertNotNull(temp);

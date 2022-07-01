@@ -6,3 +6,6 @@ build
 
 # Ignore IDE config
 .idea
+
+# Ignore bin
+bin

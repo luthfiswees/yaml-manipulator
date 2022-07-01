@@ -8,17 +8,16 @@ import java.lang.NullPointerException;
 
 public class Implementation {
 
-    static String DEFAULT_KEYSET_SEPARATOR=":::";
-
     /**
      * Implementation for adding key and value to yaml
      * @param yaml the yaml object in a form of Map to be manipulated
      * @param keyset the set of key where you want to put your values
      * @param value the value you want to put in the key
+     * @param separator the separator that you want to use
      * @return yaml, already modified yaml where the key and value already added
     */
-    public static Map<String, Object> addKey(Map<String, Object> yaml, String keyset, Object value) {
-        String[] keys = keyset.split(DEFAULT_KEYSET_SEPARATOR);
+    public static Map<String, Object> addKey(Map<String, Object> yaml, String keyset, Object value, String separator) {
+        String[] keys = keyset.split(separator);
         Map<String, Object> pointer = yaml;
 
         /**Navigate every key in keyset*/
@@ -59,10 +58,11 @@ public class Implementation {
      * Implementation for deleting key and value from yaml
      * @param yaml the yaml object in a form of Map to be manipulated
      * @param keyset the set of key where you want to remove
+     * @param separator the separator that you want to use
      * @return yaml, already modified yaml where the key and value already removed
     */
-    public static Map<String, Object> deleteKey(Map<String, Object> yaml, String keyset) {
-        String[] keys = keyset.split(DEFAULT_KEYSET_SEPARATOR);
+    public static Map<String, Object> deleteKey(Map<String, Object> yaml, String keyset, String separator) {
+        String[] keys = keyset.split(separator);
         Map<String, Object> pointer = yaml;
         boolean isClean = false;
 
@@ -96,11 +96,11 @@ public class Implementation {
             for (int i=0; i<keys.length-1; i++) {
                 tempKeyset += keys[i];
                 /** If not the last key (for parent key), add separator between them */
-                if (i != keys.length-2) tempKeyset += DEFAULT_KEYSET_SEPARATOR;
+                if (i != keys.length-2) tempKeyset += separator;
             }
 
             /** Call the delKey recursively for the parent key */ 
-            return deleteKey(yaml, tempKeyset);
+            return deleteKey(yaml, tempKeyset, separator);
         } 
         /** If isClean false, means in this depth there are still other nodes. So the generated yaml will still make sense. Ignore and return the yaml */ 
         else {
