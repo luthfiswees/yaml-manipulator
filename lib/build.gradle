@@ -18,7 +18,10 @@ plugins {
 // Metadata
 group 'id.luthfiswees'
 archivesBaseName = "yaml-manipulator"
-version '0.0.3'
+version '0.0.4'
+
+// source compatibility
+sourceCompatibility = 1.8
 
 repositories {
     // Use Maven Central for resolving dependencies.
