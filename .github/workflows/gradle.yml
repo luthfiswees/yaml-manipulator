@@ -55,7 +55,7 @@ jobs:
     - name: Setup Gradle and Publish
       uses: gradle/gradle-build-action@v2
       with:
-        gradle-version: 6.5
+        gradle-version: 6.0.1
         arguments: clean publish
     # - name: Publish to Nexus Repository
     #   shell: bash
