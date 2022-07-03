@@ -10,17 +10,17 @@ Yaml manipulator library, built on top of [Snakeyaml](https://mvnrepository.com/
 <dependency>
   <groupId>id.luthfiswees</groupId>
   <artifactId>yaml-manipulator</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.7</version>
 </dependency>
 ```
 
 ### Gradle 
 ```
-implementation 'id.luthfiswees:yaml-manipulator:0.0.4'
+implementation 'id.luthfiswees:yaml-manipulator:0.0.7'
 ```
 
 ### Others
-For the resource of the installation guide, you can also refer it [here](https://search.maven.org/artifact/id.luthfiswees/yaml-manipulator/0.0.4/jar)
+For the resource of the installation guide, you can also refer it [here](https://search.maven.org/artifact/id.luthfiswees/yaml-manipulator/0.0.7/jar)
 
 ## How to use
 

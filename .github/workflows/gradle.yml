@@ -60,16 +60,3 @@ jobs:
       with:
         gradle-version: 6.0.1
         arguments: clean publish --quiet
-    # - name: Publish to Nexus Repository
-    #   shell: bash
-    #   env:
-    #     OSSRHUSERNAME: ${{ secrets.OSSRHUSERNAME }}
-    #     OSSRHPASSWORD: ${{ secrets.OSSRHPASSWORD }}
-    #   run: ./gradlew clean publish
-
-  #     uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-  #     env:
-  #       OSSRHUSERNAME: ${{ secrets.OSSRHUSERNAME }}
-  #       OSSRHPASSWORD: ${{ secrets.OSSRHPASSWORD }}
-  #     with:
-  #       arguments: clean publish
