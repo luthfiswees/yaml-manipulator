@@ -43,7 +43,6 @@ jobs:
       run: |
           mkdir -p ~/.gradle/
           echo $SIGNING_KEY_KEYRING_FILE | base64 --decode > ~/secring.kbx
-          echo "GRADLE_USER_HOME=${HOME}/.gradle" >> $GITHUB_ENV
           echo "signing.keyId=${SIGNING_KEY_ID}" > ~/.gradle/gradle.properties
           echo "signing.password=${SIGNING_KEY_PASSWORD}" >> ~/.gradle/gradle.properties
           echo "signing.secretKeyRingFile=~/secring.kbx" >> ~/.gradle/gradle.properties
