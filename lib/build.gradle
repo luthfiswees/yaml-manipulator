@@ -16,7 +16,9 @@ plugins {
 }
 
 // Metadata
+group 'id.luthfiswees'
 archivesBaseName = "yaml-manipulator"
+version '0.0.6'
 
 // source compatibility
 sourceCompatibility = 1.8
