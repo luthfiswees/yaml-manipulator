@@ -4,7 +4,7 @@ plugins {
 
 // Metadata
 group 'id.luthfiswees'
-version '0.0.5'
+version '0.0.6'
 
 nexusPublishing {
     repositories {
