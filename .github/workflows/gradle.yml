@@ -54,6 +54,9 @@ jobs:
           echo "signing.secretKeyRingFile=${HOME}/secring.kbx" >> ~/.gradle/gradle.properties
     - name: Setup Gradle and Publish
       uses: gradle/gradle-build-action@v2
+      env:
+        OSSRHUSERNAME: ${{ secrets.OSSRHUSERNAME }}
+        OSSRHPASSWORD: ${{ secrets.OSSRHPASSWORD }}
       with:
         gradle-version: 6.0.1
         arguments: clean publish --quiet
