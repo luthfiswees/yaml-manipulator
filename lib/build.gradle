@@ -52,6 +52,7 @@ tasks.named('test') {
 
 javadoc {
     classpath = sourceSets.main.runtimeClasspath
+	options.addStringOption('Xdoclint:none', '-quiet')
 }
 
 task javadocJarHelper(type: Javadoc) {
