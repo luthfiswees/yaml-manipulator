@@ -16,9 +16,7 @@ plugins {
 }
 
 // Metadata
-group 'id.luthfiswees'
 archivesBaseName = "yaml-manipulator"
-version '0.0.4'
 
 // source compatibility
 sourceCompatibility = 1.8
@@ -79,8 +77,8 @@ publishing {
 			def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 			url = project.version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 			credentials {
-				username = findProperty('ossrhUsername')
-				password = findProperty('ossrhPassword')
+				username = System.getenv("OSSRHUSERNAME")
+				password = System.getenv("OSSRHPASSWORD")
 			}
 		}
 	}

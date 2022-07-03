@@ -1,0 +1,18 @@
+plugins {
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+}
+
+// Metadata
+group 'id.luthfiswees'
+version '0.0.5'
+
+nexusPublishing {
+    repositories {
+        myNexus {
+            nexusUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            snapshotRepositoryUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            username = System.getenv("OSSRHUSERNAME")
+            password = System.getenv("OSSRHPASSWORD")
+        }
+    }
+}
