@@ -53,5 +53,5 @@ jobs:
         OSSRHUSERNAME: ${{ secrets.OSSRHUSERNAME }}
         OSSRHPASSWORD: ${{ secrets.OSSRHPASSWORD }}
       with:
-        gradle-version: 6
+        gradle-version: 6.8
         arguments: clean publish
