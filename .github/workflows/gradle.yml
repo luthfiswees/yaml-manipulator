@@ -48,10 +48,10 @@ jobs:
         SIGNING_KEY_KEYRING_FILE: ${{ secrets.SIGNING_KEY_KEYRING_FILE }}
       run: |
           mkdir -p ~/.gradle/
-          echo $SIGNING_KEY_KEYRING_FILE | base64 --decode > ~/secring.kbx
+          echo $SIGNING_KEY_KEYRING_FILE | base64 --decode > "${HOME}/secring.kbx"
           echo "signing.keyId=${SIGNING_KEY_ID}" > ~/.gradle/gradle.properties
           echo "signing.password=${SIGNING_KEY_PASSWORD}" >> ~/.gradle/gradle.properties
-          echo "signing.secretKeyRingFile=~/secring.kbx" >> ~/.gradle/gradle.properties
+          echo "signing.secretKeyRingFile=${HOME}/secring.kbx" >> ~/.gradle/gradle.properties
     - name: Setup Gradle and Publish
       uses: gradle/gradle-build-action@v2
       with:
