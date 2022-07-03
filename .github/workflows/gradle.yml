@@ -56,7 +56,7 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 6.0.1
-        arguments: clean publish
+        arguments: clean publish --quiet
     # - name: Publish to Nexus Repository
     #   shell: bash
     #   env:
