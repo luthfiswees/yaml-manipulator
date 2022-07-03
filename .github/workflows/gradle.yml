@@ -31,7 +31,6 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     environment: production
-    if: ${{ github.ref == 'main' }}
     steps:
     - name: Creating Gradle properties file
       shell: bash
